@@ -60,7 +60,6 @@ def main():
             valid, last = validate_setup(df)
             if valid:
                 msg = f"🚨 Alert for {TICKER}\nPrice: {last['Close']:.2f}\nVolume: {last['Volume']}\nRSI: {last['rsi']:.2f}\nVWAP: {last['vwap']:.2f}"
-
 Price: {last['Close']:.2f}
 Volume: {last['Volume']}
 RSI: {last['rsi']:.2f}
