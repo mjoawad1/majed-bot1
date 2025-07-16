@@ -6,7 +6,7 @@ import time
 import requests
 from datetime import datetime
 
-# ================== CONFIG ====================
+# ======================= CONFIG ========================
 TICKER = "LLY"
 RSI_PERIOD = 14
 INTERVAL = "5m"
@@ -16,7 +16,7 @@ RSI_THRESHOLD = 50
 VWAP_DELTA_LIMIT = 0.5
 TG_BOT_TOKEN = "7751828513:AAENaClWSgpDl3MWHKKggsrikLNL2UAgIKU"
 TG_CHAT_ID = "907017696"
-# ==============================================
+# =======================================================
 
 def get_data():
     df = yf.download(TICKER, period=LOOKBACK, interval=INTERVAL)
@@ -59,18 +59,20 @@ def main():
             df = get_data()
             valid, last = validate_setup(df)
             if valid:
-                msg = f"🚨 Alert for {TICKER}\nPrice: {last['Close']:.2f}\nVolume: {last['Volume']}\nRSI: {last['rsi']:.2f}\nVWAP: {last['vwap']:.2f}"
-Price: {last['Close']:.2f}
-Volume: {last['Volume']}
-RSI: {last['rsi']:.2f}
-VWAP: {last['vwap']:.2f}"
+                msg = (
+                    f"🚨 Alert for {TICKER}\n"
+                    f"Price: {last['Close']:.2f}\n"
+                    f"Volume: {last['Volume']}\n"
+                    f"RSI: {last['rsi']:.2f}\n"
+                    f"VWAP: {last['vwap']:.2f}"
+                )
                 print(msg)
                 send_telegram_alert(msg)
             else:
                 print(f"{datetime.now()}: No valid setup.")
         except Exception as e:
             print(f"Error: {e}")
-        time.sleep(300)  # every 5 mins
+        time.sleep(300)  # كل 5 دقائق
 
 if __name__ == "__main__":
     main()
